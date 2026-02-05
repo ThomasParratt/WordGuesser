@@ -8,6 +8,12 @@ function App() {
   const row2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
   const row3 = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
 
+  const [typed, setTyped] = useState("");
+
+  const handleClick = (char) => {
+    setTyped((prev) => prev + char);
+  };
+
   return (
     <section>
       <h1 className="text-center text-5xl">WordGuesser</h1>
@@ -15,9 +21,9 @@ function App() {
         {squares.map((_, index) => (
           <div
             key={index}
-            className="bg-white aspect-square flex items-center justify-center text-white text-4xl font-bold border-2 border-gray-500"
+            className="bg-white aspect-square flex items-center justify-center text-black text-5xl font-bold border-2 border-gray-500"
           >
-            C
+            {typed[index]}
           </div>
         ))}
       </div>
@@ -25,6 +31,7 @@ function App() {
         {row1.map((_, index) => (
           <div
             key={index}
+            onClick={() => handleClick(row1[index])}
             className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
           >
             {row1[index]}
@@ -35,6 +42,7 @@ function App() {
         {row2.map((_, index) => (
           <div
             key={index}
+            onClick={() => handleClick(row2[index])}
             className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
           >
             {row2[index]}
@@ -45,6 +53,7 @@ function App() {
         {row3.map((_, index) => (
           <div
             key={index}
+            onClick={() => handleClick(row3[index])}
             className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
           >
             {row3[index]}
