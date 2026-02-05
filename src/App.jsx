@@ -12,47 +12,47 @@ function App() {
 
   return (
     <section>
-    <h1 className="text-center text-5xl">WordGuesser</h1>
-    <div className="max-w-2xl mx-auto grid grid-cols-5 grid-rows-4 gap-2 p-12">
-      {squares.map((_, index) => (
-        <div
-          key={index}
-          className="bg-gray-500 aspect-square flex items-center justify-center text-white text-4xl font-bold border-2 border-gray-500"
-        >
-          {index + 1}
-        </div>
-      ))}
-    </div>
-    <div className="mt-8 max-w-4xl mx-auto w-fit grid grid-cols-10 grid-rows-1 gap-2 p-1">
-      {row1.map((_, index) => (
-        <div
-          key={index}
-          className="min-w-20 min-h-24 bg-gray-500 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
-        >
-          {row1[index]}
-        </div>
-      ))}
-    </div>
-    <div className="max-w-4xl mx-auto w-fit grid grid-cols-9 grid-rows-1 gap-2 p-1">
-      {row2.map((_, index) => (
-        <div
-          key={index}
-          className="min-w-20 min-h-24 bg-gray-500 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
-        >
-          {row2[index]}
-        </div>
-      ))}
-    </div>
-    <div className="max-w-4xl mx-auto w-fit grid grid-cols-9 grid-rows-1 gap-2 p-1">
-      {row3.map((_, index) => (
-        <div
-          key={index}
-          className="min-w-20 min-h-24 bg-gray-500 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
-        >
-          {row3[index]}
-        </div>
-      ))}
-    </div>
+      <h1 className="text-center text-5xl">WordGuesser</h1>
+      <div className="max-w-2xl mx-auto grid grid-cols-5 grid-rows-4 gap-2 p-12">
+        {squares.map((_, index) => (
+          <div
+            key={index}
+            className="bg-white aspect-square flex items-center justify-center text-white text-4xl font-bold border-2 border-gray-500"
+          >
+            C
+          </div>
+        ))}
+      </div>
+      <div className="mt-8 max-w-4xl mx-auto w-fit grid grid-cols-10 grid-rows-1 gap-2 p-1">
+        {row1.map((_, index) => (
+          <div
+            key={index}
+            className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
+          >
+            {row1[index]}
+          </div>
+        ))}
+      </div>
+      <div className="max-w-4xl mx-auto w-fit grid grid-cols-9 grid-rows-1 gap-2 p-1">
+        {row2.map((_, index) => (
+          <div
+            key={index}
+            className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
+          >
+            {row2[index]}
+          </div>
+        ))}
+      </div>
+      <div className="max-w-4xl mx-auto w-fit grid grid-cols-9 grid-rows-1 gap-2 p-1">
+        {row3.map((_, index) => (
+          <div
+            key={index}
+            className="min-w-20 min-h-24 bg-gray-500 cursor-pointer active:scale-95 rounded-xl flex items-center justify-center text-white text-2xl font-bold"
+          >
+            {row3[index]}
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
