@@ -9,18 +9,23 @@ function App() {
 
   const [typed, setTyped] = useState("");
   const [activeIndices, setActiveIndices] = useState([]);
-  const [count, setCount] = useState(0);
+  const [chars, setChars] = useState(0);
+  const [attempts, setAttempts] = useState(false); //to say that an attempt has finished
 
   const handleClick = (char, index) => {
-    if (count === 5 && index - 19 !== 0)
-      return ;
-    if (index - 19 === 0)
+    if (chars === 5 && index - 19 !== 0)
     {
-      setCount(0);
+      return ;
+    }
+    if (chars === 5 && index - 19 === 0)
+    {
+      setAttempts(true);
+      setChars(0);
     }
     else
     {
-      setCount(prev => (prev + 1));
+      setChars(prev => (prev + 1));
+      //setAttempts(false);
     }
     if (index - 19 !== 0 && index - 19 !== 8)
     {
@@ -30,7 +35,8 @@ function App() {
         setActiveIndices([...activeIndices, index]);
       }
     }
-    console.log(count);
+    console.log(chars);
+    console.log(attempts);
   };
 
   return (
@@ -40,7 +46,7 @@ function App() {
           <div
             key={index}
             className={`min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300 ${
-              count === 5 ? "bg-gray-600 text-white border-0" : "bg-white text-black"}
+              attempts && typed[index] ? "bg-gray-600 text-white border-0" : "bg-white text-black"}
               ${typed[index] ? "border-gray-600" : "border-gray-300"}
             }`}
           >
@@ -54,7 +60,7 @@ function App() {
             key={index}
             onClick={() => handleClick(value, index)}
             className={`min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black text-2xl font-bold ${
-              activeIndices.includes(index) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+              activeIndices.includes(index) && attempts ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
             }`}
           >
             {value}
@@ -67,7 +73,7 @@ function App() {
             key={index + 10}
             onClick={() => handleClick(value, index + 10)}
             className={`min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black text-2xl font-bold ${
-              activeIndices.includes(index + 10) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+              activeIndices.includes(index + 10) && attempts ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
             }`}
           >
             {value}
@@ -80,7 +86,7 @@ function App() {
             key={index}
             onClick={() => handleClick(value, index + 19)}
             className={`min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black font-bold ${
-              (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + (activeIndices.includes(index + 19) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black")
+              (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + (activeIndices.includes(index + 19) && attempts ? "bg-gray-600 text-white" : "bg-gray-300 text-black")
             }`}
           >
             {index === 8 ? (
