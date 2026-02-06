@@ -44,7 +44,6 @@ function App() {
         {squares.map((_, index) => {
           const row = Math.floor(index / 5); // calculate the row of this square
           const isCompletedRow = row < attempts; // mark completed rows
-          const value = typed[index] || "";
           return (
             <div
               key={index}
@@ -52,7 +51,7 @@ function App() {
                 ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
               `}
             >
-              {value}
+              {typed[index]}
             </div>
           );
         })}
