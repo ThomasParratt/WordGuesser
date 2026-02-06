@@ -5,14 +5,16 @@ import back from './assets/back.svg'
 function App() {
   // Create an array with 30 items
   const squares = Array.from({ length: 30 });
-  const row1 = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
-  const row2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
-  const row3 = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
+  const alphabet = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
 
   const [typed, setTyped] = useState("");
+  const [activeIndices, setActiveIndices] = useState([]);
 
-  const handleClick = (char) => {
+  const handleClick = (char, index) => {
     setTyped((prev) => prev + char);
+    if (!activeIndices.includes(index)) {
+      setActiveIndices([...activeIndices, index]);
+    }
   };
 
   return (
@@ -28,40 +30,42 @@ function App() {
         ))}
       </div>
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
-        {row1.map((_, index) => (
+        {alphabet.slice(0, 10).map((value, index) => (
           <div
             key={index}
-            onClick={() => handleClick(row1[index])}
-            className="min-w-10 min-h-20 bg-gray-300 cursor-pointer active:scale-95 rounded-md flex items-center justify-center text-black text-2xl font-bold"
+            onClick={() => handleClick(value, index)}
+            className="min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-black text-2xl font-bold"
           >
-            {row1[index]}
+            {value}
           </div>
         ))}
       </div>
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
-        {row2.map((_, index) => (
+        {alphabet.slice(10, 19).map((value, index) => (
           <div
-            key={index}
-            onClick={() => handleClick(row2[index])}
-            className="min-w-10 min-h-20 bg-gray-300 cursor-pointer active:scale-95 rounded-md flex items-center justify-center text-black text-2xl font-bold"
+            key={index + 10}
+            onClick={() => handleClick(value, index + 10)}
+            className={`min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black text-2xl font-bold ${
+              activeIndices.includes(index + 10) ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+            }`}
           >
-            {row2[index]}
+            {value}
           </div>
         ))}
       </div>
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
-        {row3.map((_, index) => (
+        {alphabet.slice(19, 28).map((value, index) => (
           <div
             key={index}
-            onClick={() => handleClick(row3[index])}
-            className={`min-h-20 bg-gray-300 cursor-pointer active:scale-95 rounded-md flex items-center justify-center text-black font-bold ${
-              index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl"
+            onClick={() => handleClick(value, index + 19)}
+            className={`min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black font-bold ${
+              (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + (activeIndices.includes(index + 19) ? "bg-gray-600 text-white" : "bg-gray-300 text-black")
             }`}
           >
             {index === 8 ? (
               <img src={back} alt="Back" className="w-7 h-7" />
             ) : (
-              row3[index]
+              value
             )}
           </div>
         ))}
