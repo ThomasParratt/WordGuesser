@@ -44,11 +44,16 @@ function App() {
       <div className="max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 p-12">
         {squares.map((_, index) => {
           var isCorrect = false;
+          var orange = false;
           const row = Math.floor(index / 5); // calculate the row of this square
           const isCompletedRow = row < attempts; // mark completed rows
           if (typed[index] === answer[index % 5]) // works for first row
           {
             isCorrect = true;
+          }
+          else if (answer.includes(typed[index]))
+          {
+            orange = true;
           }
           return (
             <div
@@ -56,6 +61,7 @@ function App() {
               className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold border-2
                 ${typed[index] ? "border-gray-600" : "border-gray-300"}
                 ${isCompletedRow && isCorrect ? "bg-green-600 text-white border-0" : "bg-white text-black border-gray-300"}
+                ${isCompletedRow && orange ? "bg-amber-400 text-white border-0" : "bg-white text-black border-gray-300"}
                 ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
               `}
             >
