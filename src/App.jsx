@@ -41,17 +41,21 @@ function App() {
   return (
     <section>
       <div className="max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 p-12">
-        {squares.map((_, index) => (
-          <div
-            key={index}
-            className={`min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300 ${
-              attempts && typed[index] ? "bg-gray-600 text-white border-0" : "bg-white text-black"}
-              ${typed[index] ? "border-gray-600" : "border-gray-300"}
-            }`}
-          >
-            {typed[index]}
-          </div>
-        ))}
+        {squares.map((_, index) => {
+          const row = Math.floor(index / 5); // calculate the row of this square
+          const isCompletedRow = row < attempts; // mark completed rows
+          const value = typed[index] || "";
+          return (
+            <div
+              key={index}
+              className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold border-2
+                ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
+              `}
+            >
+              {value}
+            </div>
+          );
+        })}
       </div>
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => (
