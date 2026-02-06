@@ -10,7 +10,7 @@ function App() {
   const [typed, setTyped] = useState("");
   const [activeIndices, setActiveIndices] = useState([]);
   const [chars, setChars] = useState(0);
-  const [attempts, setAttempts] = useState(false); //to say that an attempt has finished
+  const [attempts, setAttempts] = useState(0); //to say that an attempt has finished
 
   const handleClick = (char, index) => {
     if (chars === 5 && index - 19 !== 0)
@@ -19,13 +19,12 @@ function App() {
     }
     if (chars === 5 && index - 19 === 0)
     {
-      setAttempts(true);
+      setAttempts(prev => (prev + 1));
       setChars(0);
     }
     else
     {
       setChars(prev => (prev + 1));
-      //setAttempts(false);
     }
     if (index - 19 !== 0 && index - 19 !== 8)
     {
