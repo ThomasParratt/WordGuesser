@@ -46,7 +46,7 @@ function App() {
           var isCorrect = false;
           const row = Math.floor(index / 5); // calculate the row of this square
           const isCompletedRow = row < attempts; // mark completed rows
-          if (typed[index] === answer[index])
+          if (typed[index] === answer[index]) // works for first row
           {
             isCorrect = true;
           }
