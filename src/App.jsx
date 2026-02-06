@@ -48,6 +48,7 @@ function App() {
             <div
               key={index}
               className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold border-2
+                ${typed[index] ? "border-gray-600" : "border-gray-300"}
                 ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
               `}
             >
