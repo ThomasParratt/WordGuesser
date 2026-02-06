@@ -11,9 +11,13 @@ function App() {
   const [activeIndices, setActiveIndices] = useState([]);
 
   const handleClick = (char, index) => {
-    setTyped((prev) => prev + char);
-    if (!activeIndices.includes(index)) {
-      setActiveIndices([...activeIndices, index]);
+    if (index - 19 !== 0 && index - 19 !== 8)
+    {
+      setTyped((prev) => prev + char);
+      if (!activeIndices.includes(index)) 
+      {
+        setActiveIndices([...activeIndices, index]);
+      }
     }
   };
 
