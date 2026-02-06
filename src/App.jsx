@@ -9,8 +9,19 @@ function App() {
 
   const [typed, setTyped] = useState("");
   const [activeIndices, setActiveIndices] = useState([]);
+  const [count, setCount] = useState(0);
 
   const handleClick = (char, index) => {
+    if (count === 5 && index - 19 !== 0)
+      return ;
+    if (index - 19 === 0)
+    {
+      setCount(0);
+    }
+    else
+    {
+      setCount(prev => (prev + 1));
+    }
     if (index - 19 !== 0 && index - 19 !== 8)
     {
       setTyped((prev) => prev + char);
@@ -19,6 +30,7 @@ function App() {
         setActiveIndices([...activeIndices, index]);
       }
     }
+    console.log(count);
   };
 
   return (
@@ -27,7 +39,9 @@ function App() {
         {squares.map((_, index) => (
           <div
             key={index}
-            className="min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300"
+            className={`min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300 ${
+              count === 5 ? "bg-gray-400 text-white border-0" : "bg-white text-black"
+            }`}
           >
             {typed[index]}
           </div>
