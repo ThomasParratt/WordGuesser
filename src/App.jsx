@@ -40,7 +40,8 @@ function App() {
           <div
             key={index}
             className={`min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300 ${
-              count === 5 ? "bg-gray-600 text-white border-0" : "bg-white text-black"
+              count === 5 ? "bg-gray-600 text-white border-0" : "bg-white text-black"}
+              ${typed[index] ? "border-gray-600" : "border-gray-300"}
             }`}
           >
             {typed[index]}
