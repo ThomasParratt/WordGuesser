@@ -40,7 +40,7 @@ function App() {
           <div
             key={index}
             className={`min-h-20 bg-white aspect-square flex items-center justify-center text-black text-4xl font-bold border-2 border-gray-300 ${
-              count === 5 ? "bg-gray-400 text-white border-0" : "bg-white text-black"
+              count === 5 ? "bg-gray-600 text-white border-0" : "bg-white text-black"
             }`}
           >
             {typed[index]}
@@ -52,7 +52,9 @@ function App() {
           <div
             key={index}
             onClick={() => handleClick(value, index)}
-            className="min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-black text-2xl font-bold"
+            className={`min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black text-2xl font-bold ${
+              activeIndices.includes(index) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+            }`}
           >
             {value}
           </div>
@@ -64,7 +66,7 @@ function App() {
             key={index + 10}
             onClick={() => handleClick(value, index + 10)}
             className={`min-w-10 min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black text-2xl font-bold ${
-              activeIndices.includes(index + 10) ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+              activeIndices.includes(index + 10) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
             }`}
           >
             {value}
@@ -77,7 +79,7 @@ function App() {
             key={index}
             onClick={() => handleClick(value, index + 19)}
             className={`min-h-20 bg-gray-300 cursor-pointer active:bg-grey-400 rounded-md flex items-center justify-center text-black font-bold ${
-              (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + (activeIndices.includes(index + 19) ? "bg-gray-600 text-white" : "bg-gray-300 text-black")
+              (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + (activeIndices.includes(index + 19) && count === 5 ? "bg-gray-600 text-white" : "bg-gray-300 text-black")
             }`}
           >
             {index === 8 ? (
