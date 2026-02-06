@@ -4,6 +4,7 @@ import back from './assets/back.svg'
 
 function App() {
   // Create an array with 30 items
+  const answer = ['H', 'E', 'L', 'L', 'O'];
   const squares = Array.from({ length: 30 });
   const alphabet = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
 
@@ -42,13 +43,19 @@ function App() {
     <section>
       <div className="max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 p-12">
         {squares.map((_, index) => {
+          var isCorrect = false;
           const row = Math.floor(index / 5); // calculate the row of this square
           const isCompletedRow = row < attempts; // mark completed rows
+          if (typed[index] === answer[index])
+          {
+            isCorrect = true;
+          }
           return (
             <div
               key={index}
               className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold border-2
                 ${typed[index] ? "border-gray-600" : "border-gray-300"}
+                ${isCompletedRow && isCorrect ? "bg-green-600 text-white border-0" : "bg-white text-black border-gray-300"}
                 ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
               `}
             >
