@@ -43,33 +43,40 @@ function App() {
     <section>
       <div className="max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 p-12">
         {squares.map((_, index) => {
-          var isCorrect = false;
-          var orange = false;
-          const row = Math.floor(index / 5); // calculate the row of this square
-          const isCompletedRow = row < attempts; // mark completed rows
-          if (typed[index] === answer[index % 5]) // works for first row
-          {
-            isCorrect = true;
+          const row = Math.floor(index / 5);
+          const isCompletedRow = row < attempts;
+
+          const letter = typed[index];
+          const correctLetter = answer[index % 5];
+
+          const isCorrect = letter === correctLetter;
+          const isPresent = letter && answer.includes(letter);
+
+          let bgClass = "bg-white text-black border-2 border-gray-300";
+
+          if (isCompletedRow) {
+            if (isCorrect) {
+              bgClass = "bg-green-600 text-white border-0";
+            } else if (isPresent) {
+              bgClass = "bg-amber-400 text-white border-0";
+            } else {
+              bgClass = "bg-gray-600 text-white border-0";
+            }
+          } else if (letter) {
+            bgClass = "border-2 border-gray-600";
           }
-          else if (answer.includes(typed[index]))
-          {
-            orange = true;
-          }
+
           return (
             <div
               key={index}
-              className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold border-2
-                ${typed[index] ? "border-gray-600" : "border-gray-300"}
-                ${isCompletedRow && isCorrect ? "bg-green-600 text-white border-0" : "bg-white text-black border-gray-300"}
-                ${isCompletedRow && orange ? "bg-amber-400 text-white border-0" : "bg-white text-black border-gray-300"}
-                ${isCompletedRow ? "bg-gray-600 text-white border-0" : "bg-white text-black border-gray-300"}
-              `}
+              className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold ${bgClass}`}
             >
-              {typed[index]}
+              {letter}
             </div>
           );
         })}
       </div>
+
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => (
           <div
