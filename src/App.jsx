@@ -13,7 +13,7 @@ function App() {
   const [activeOrange, setOrange] = useState([]);
   const [activeGray, setGray] = useState([]);
   const [chars, setChars] = useState(0);
-  const [attempts, setAttempts] = useState(0); //to say that an attempt has finished
+  const [attempts, setAttempts] = useState(0);
 
   const handleClick = (char, index) => {
     if (chars === 5 && index - 19 !== 0)
