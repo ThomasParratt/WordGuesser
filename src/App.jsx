@@ -20,7 +20,7 @@ function App() {
     {
       return ;
     }
-    if (chars === 5 && index - 19 === 0)
+    if (chars === 5 && index - 19 === 0) //ENTER
     {
       const start = attempts * 5;
       const guess = typed.slice(start, start + 5);
@@ -41,17 +41,18 @@ function App() {
             setGray(prev => [...prev, keyIndex]);
         }
       });
-      
+
       setAttempts(prev => (prev + 1));
       setChars(0);
     }
-    else
+    else if (index - 19 !== 0 && index - 19 !== 8)
     {
       setChars(prev => (prev + 1));
-    }
-    if (index - 19 !== 0 && index - 19 !== 8)
-    {
       setTyped((prev) => prev + char);
+    }
+    else //BACK
+    {
+      console.log("BACK");
     }
     //console.log(chars);
     //console.log(attempts);
