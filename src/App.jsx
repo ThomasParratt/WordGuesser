@@ -50,9 +50,11 @@ function App() {
       setChars(prev => (prev + 1));
       setTyped((prev) => prev + char);
     }
-    else //BACK
+    else if (index - 19 === 8) //BACK
     {
       console.log("BACK");
+      setTyped((prev) => prev.slice(0, -1));
+      setChars(prev => prev - 1);
     }
     //console.log(chars);
     //console.log(attempts);
@@ -84,6 +86,7 @@ function App() {
           } else if (letter) {
             bgClass = "border-2 border-gray-600";
           }
+          
 
           return (
             <div
