@@ -97,15 +97,15 @@ function App() {
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
-          if (activeGreen.includes(index) && attempts)
+          if (activeGreen.includes(index))
           {
             bgClass = "bg-green-600 text-white";
           }
-          else if (activeOrange.includes(index) && attempts)
+          else if (activeOrange.includes(index))
           {
             bgClass = "bg-amber-400 text-white";
           }
-          else if (activeGray.includes(index) && attempts)
+          else if (activeGray.includes(index))
           {
             bgClass = "bg-gray-600 text-white";
           }
@@ -125,15 +125,15 @@ function App() {
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(10, 19).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
-          if (activeGreen.includes(index + 10) && attempts)
+          if (activeGreen.includes(index + 10))
           {
             bgClass = "bg-green-600 text-white";
           }
-          else if (activeOrange.includes(index + 10) && attempts)
+          else if (activeOrange.includes(index + 10))
           {
             bgClass = "bg-amber-400 text-white";
           }
-          else if (activeGray.includes(index + 10) && attempts)
+          else if (activeGray.includes(index + 10))
           {
             bgClass = "bg-gray-600 text-white";
           }
@@ -153,15 +153,15 @@ function App() {
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(19, 28).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
-          if (activeGreen.includes(index + 19) && attempts)
+          if (activeGreen.includes(index + 19))
           {
             bgClass = "bg-green-600 text-white";
           }
-          else if (activeOrange.includes(index + 19) && attempts)
+          else if (activeOrange.includes(index + 19))
           {
             bgClass = "bg-amber-400 text-white";
           }
-          else if (activeGray.includes(index + 19) && attempts)
+          else if (activeGray.includes(index + 19))
           {
             bgClass = "bg-gray-600 text-white";
           }
