@@ -23,24 +23,25 @@ function App() {
     if (chars === 5 && index - 19 === 0)
     {
       const start = attempts * 5;
-    const guess = typed.slice(start, start + 5);
+      const guess = typed.slice(start, start + 5);
 
-    guess.split("").forEach((letter, i) => {
-      const keyIndex = alphabet.indexOf(letter);
+      guess.split("").forEach((letter, i) => {
+        const keyIndex = alphabet.indexOf(letter);
 
-      if (letter === answer[i]) {
-        if (!activeGreen.includes(keyIndex))
-          setGreen(prev => [...prev, keyIndex]);
-      }
-      else if (answer.includes(letter)) {
-        if (!activeOrange.includes(keyIndex))
-          setOrange(prev => [...prev, keyIndex]);
-      }
-      else {
-        if (!activeGray.includes(keyIndex))
-          setGray(prev => [...prev, keyIndex]);
-      }
-    });
+        if (letter === answer[i]) {
+          if (!activeGreen.includes(keyIndex))
+            setGreen(prev => [...prev, keyIndex]);
+        }
+        else if (answer.includes(letter)) {
+          if (!activeOrange.includes(keyIndex))
+            setOrange(prev => [...prev, keyIndex]);
+        }
+        else {
+          if (!activeGray.includes(keyIndex))
+            setGray(prev => [...prev, keyIndex]);
+        }
+      });
+      
       setAttempts(prev => (prev + 1));
       setChars(0);
     }
