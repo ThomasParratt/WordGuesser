@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import back from './assets/back.svg'
 
-function App() {
+function App() { //CAN'T HAVE TWO ORANGES IF THERE IS ONLY ONE OF THAT LETTER!!!!!!!
   // Create an array with 30 items
   const answer = ['H', 'E', 'L', 'L', 'O'];
   const squares = Array.from({ length: 30 });
@@ -16,10 +16,6 @@ function App() {
   const [attempts, setAttempts] = useState(0);
 
   const handleClick = (char, index) => {
-    if (chars === 5 && index - 19 !== 0)
-    {
-      return ;
-    }
     if (chars === 5 && index - 19 === 0) //ENTER
     {
       const start = attempts * 5;
@@ -45,7 +41,7 @@ function App() {
       setAttempts(prev => (prev + 1));
       setChars(0);
     }
-    else if (index - 19 !== 0 && index - 19 !== 8)
+    else if (index - 19 !== 0 && index - 19 !== 8) //SELECTING CHAR
     {
       setChars(prev => (prev + 1));
       setTyped((prev) => prev + char);
