@@ -15,6 +15,8 @@ function App() {
   const [attempts, setAttempts] = useState(0);
   // NEW: store per-tile results as 'green' | 'orange' | 'gray' | null
   const [tileResults, setTileResults] = useState(Array(30).fill(null));
+  const [win, setWin] = useState(false);
+  const [message, setMessage] = useState("Genius");
 
   const evaluateGuess = (guess) => {
     // guess is an array of 5 letters
@@ -54,8 +56,32 @@ function App() {
     {
       const start = attempts * 5;
       const guess = typed.slice(start, start + 5).split("");
+      console.log(answer);
+      console.log(guess);
+      if (guess.join("") === answer.join("")) {
+        setWin(true);
+        switch (attempts) {
+          case 1:
+            setMessage("Magnificent");
+            break;
+          case 2:
+            setMessage("Impressive");
+            break;
+          case 3:
+            setMessage("Splendid");
+            break;
+          case 4:
+            setMessage("Great");
+            break;
+          case 5:
+            setMessage("Phew");
+            break;
+          default:
+            console.log("Unknown");
+        }
+        console.log("WELL DONE!");
+      }
       const result = evaluateGuess(guess);
-
       // Update tile results
       const newTileResults = [...tileResults];
       result.forEach((r, i) => {
@@ -108,7 +134,7 @@ function App() {
 
   return (
     <section>
-      <div className="max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 p-12">
+      <div className="relative max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 pt-20 pb-12">
         {squares.map((_, index) => {
           const letter = typed[index];
           const result = tileResults[index];
@@ -134,7 +160,9 @@ function App() {
           );
         })}
       </div>
-
+      {win && (
+        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-2xl font-semibold p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
+      )}
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
