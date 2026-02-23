@@ -135,7 +135,6 @@ function App() {
         })}
       </div>
 
-      {/* Keyboard rows unchanged below — just keep your existing JSX */}
       <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
