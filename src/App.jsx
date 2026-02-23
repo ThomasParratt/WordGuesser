@@ -52,6 +52,8 @@ function App() {
   };
 
   const handleClick = (char, index) => {
+    if (win)
+      return ;
     if (chars === 5 && index - 19 === 0) // ENTER
     {
       const start = attempts * 5;
