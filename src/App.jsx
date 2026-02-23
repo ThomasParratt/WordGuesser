@@ -49,10 +49,13 @@ function App() { //CAN'T HAVE TWO ORANGES IF THERE IS ONLY ONE OF THAT LETTER!!!
     else if (index - 19 === 8) //BACK
     {
       console.log("BACK");
-      setTyped((prev) => prev.slice(0, -1));
-      setChars(prev => prev - 1);
+      if (chars !== 0)
+      {
+        setTyped((prev) => prev.slice(0, -1));
+        setChars(prev => prev - 1);
+      }
     }
-    //console.log(chars);
+    console.log(chars);
     //console.log(attempts);
   };
 
