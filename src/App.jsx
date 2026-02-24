@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import back from './assets/back.svg'
 
 function App() {
