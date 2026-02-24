@@ -204,7 +204,7 @@ function App() {
           return (
             <div key={index} onClick={() => handleClick(value, index + 19)}
               className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
-                (index === 0 || index === 8 ? "min-w-12 md:min-w-16 text-sm md:text-md" : "min-w-10 text-xl md:text-2xl") + " " + bgClass
+                (index === 0 || index === 8 ? "min-w-12 md:min-w-16 text-sm md:text-md" : "text-xl md:text-2xl") + " " + bgClass
               }`}>
               {index === 8 ? <img src={back} alt="Back" className="w-7 h-7" /> : value}
             </div>
