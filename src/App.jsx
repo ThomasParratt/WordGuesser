@@ -136,7 +136,7 @@ function App() {
 
   return (
     <section>
-      <div className="w-full flex justify-center pt-6 md:pt-20 pb-6 md:pb-12">
+      <div className="w-full flex justify-center pt-16 md:pt-20 pb-6 md:pb-12">
         <div className="grid grid-cols-5 gap-1">
           {squares.map((_, index) => {
             const letter = typed[index];
@@ -156,7 +156,7 @@ function App() {
             return (
               <div
                 key={index}
-                className={`min-h-16 md:min-h-20 aspect-square flex items-center justify-center text-4xl font-bold ${bgClass}`}
+                className={`min-h-14 md:min-h-20 aspect-square flex items-center justify-center text-3xl md:text-4xl font-bold ${bgClass}`}
               >
                 {letter}
               </div>
@@ -165,7 +165,7 @@ function App() {
         </div>
       </div>
       {win && (
-        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-2xl font-semibold p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
+        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
       )}
       <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => {
@@ -175,7 +175,7 @@ function App() {
           else if (activeGray.includes(index)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index} onClick={() => handleClick(value, index)}
-              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
+              className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
               {value}
             </div>
           );
@@ -189,7 +189,7 @@ function App() {
           else if (activeGray.includes(index + 10)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index + 10} onClick={() => handleClick(value, index + 10)}
-              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
+              className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
               {value}
             </div>
           );
@@ -203,7 +203,7 @@ function App() {
           else if (activeGray.includes(index + 19)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index} onClick={() => handleClick(value, index + 19)}
-              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
+              className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
                 (index === 0 || index === 8 ? "min-w-12 md:min-w-16 text-sm md:text-md" : "min-w-10 text-xl md:text-2xl") + " " + bgClass
               }`}>
               {index === 8 ? <img src={back} alt="Back" className="w-7 h-7" /> : value}
