@@ -52,7 +52,7 @@ function App() {
   };
 
   const handleClick = (char, index) => {
-    if (win)
+    if (win || attempts >= 6)
       return ;
     if (chars === 5 && index - 19 === 0) // ENTER
     {
