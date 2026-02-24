@@ -136,7 +136,7 @@ function App() {
 
   return (
     <section>
-      <div className="relative max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-4 gap-1 pt-20 pb-12">
+      <div className="relative max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-6 gap-1 pt-20 pb-12">
         {squares.map((_, index) => {
           const letter = typed[index];
           const result = tileResults[index];
