@@ -136,36 +136,38 @@ function App() {
 
   return (
     <section>
-      <div className="relative max-w-2xl mx-auto w-fit grid grid-cols-5 grid-rows-6 gap-1 pt-20 pb-12">
-        {squares.map((_, index) => {
-          const letter = typed[index];
-          const result = tileResults[index];
+      <div className="w-full flex justify-center pt-6 md:pt-20 pb-6 md:pb-12">
+        <div className="grid grid-cols-5 gap-1">
+          {squares.map((_, index) => {
+            const letter = typed[index];
+            const result = tileResults[index];
 
-          let bgClass = "bg-white text-black border-2 border-gray-300";
-          if (result === 'green') {
-            bgClass = "bg-green-600 text-white border-0";
-          } else if (result === 'orange') {
-            bgClass = "bg-amber-400 text-white border-0";
-          } else if (result === 'gray') {
-            bgClass = "bg-gray-600 text-white border-0";
-          } else if (letter) {
-            bgClass = "border-2 border-gray-600";
-          }
+            let bgClass = "bg-white text-black border-2 border-gray-300";
+            if (result === 'green') {
+              bgClass = "bg-green-600 text-white border-0";
+            } else if (result === 'orange') {
+              bgClass = "bg-amber-400 text-white border-0";
+            } else if (result === 'gray') {
+              bgClass = "bg-gray-600 text-white border-0";
+            } else if (letter) {
+              bgClass = "border-2 border-gray-600";
+            }
 
-          return (
-            <div
-              key={index}
-              className={`min-h-20 aspect-square flex items-center justify-center text-4xl font-bold ${bgClass}`}
-            >
-              {letter}
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={index}
+                className={`min-h-16 md:min-h-20 aspect-square flex items-center justify-center text-4xl font-bold ${bgClass}`}
+              >
+                {letter}
+              </div>
+            );
+          })}
+        </div>
       </div>
       {win && (
         <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-2xl font-semibold p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
       )}
-      <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
+      <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
         {alphabet.slice(0, 10).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
           if (activeGreen.includes(index)) bgClass = "bg-green-600 text-white";
@@ -173,13 +175,13 @@ function App() {
           else if (activeGray.includes(index)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index} onClick={() => handleClick(value, index)}
-              className={`min-w-10 min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-2xl font-bold ${bgClass}`}>
+              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
               {value}
             </div>
           );
         })}
       </div>
-      <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
+      <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
         {alphabet.slice(10, 19).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
           if (activeGreen.includes(index + 10)) bgClass = "bg-green-600 text-white";
@@ -187,13 +189,13 @@ function App() {
           else if (activeGray.includes(index + 10)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index + 10} onClick={() => handleClick(value, index + 10)}
-              className={`min-w-10 min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-2xl font-bold ${bgClass}`}>
+              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
               {value}
             </div>
           );
         })}
       </div>
-      <div className="max-w-4xl mx-auto w-fit flex gap-2 p-1">
+      <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
         {alphabet.slice(19, 28).map((value, index) => {
           let bgClass = "bg-gray-300 text-black";
           if (activeGreen.includes(index + 19)) bgClass = "bg-green-600 text-white";
@@ -201,8 +203,8 @@ function App() {
           else if (activeGray.includes(index + 19)) bgClass = "bg-gray-600 text-white";
           return (
             <div key={index} onClick={() => handleClick(value, index + 19)}
-              className={`min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
-                (index === 0 || index === 8 ? "min-w-16 text-md" : "min-w-10 text-2xl") + " " + bgClass
+              className={`min-w-8 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
+                (index === 0 || index === 8 ? "min-w-12 md:min-w-16 text-sm md:text-md" : "min-w-10 text-xl md:text-2xl") + " " + bgClass
               }`}>
               {index === 8 ? <img src={back} alt="Back" className="w-7 h-7" /> : value}
             </div>
