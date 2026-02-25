@@ -70,6 +70,7 @@ function App() {
   };
 
   const handleClick = (char, index) => {
+    setNotWord(false);
     console.log("attempts: " + attempts);
     if (win || attempts >= 6)
       return ;
