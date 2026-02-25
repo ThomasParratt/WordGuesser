@@ -19,7 +19,7 @@ function wordExists(charArray) {
 }
 
 const answer = getRandomWordArray();
-// NOW NEED: NOT A WORD, REVEAL WORD AT END IF DON'T GET
+// REVEAL WORD AT END IF DON'T GET
 function App() {
   const squares = Array.from({ length: 30 });
   const alphabet = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
@@ -70,8 +70,14 @@ function App() {
   };
 
   const handleClick = (char, index) => {
-    if (win || attempts >= 6)
+    if (win)
       return ;
+    if (attempts >= 6) //NEED TO GET THIS WORKING
+    {
+      console.log("here");
+      setWin(true);
+      setMessage("Better luck next time!");
+    }
     if (chars === 5 && index - 19 === 0) // ENTER
     {
       const start = attempts * 5;
