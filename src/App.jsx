@@ -11,6 +11,13 @@ function getRandomWordArray() {
     .split("");
 }
 
+function wordExists(charArray) {
+  let word = charArray.join('');
+  word = word.toLowerCase();
+  console.log(word);
+  return words.includes(word);
+}
+
 const answer = getRandomWordArray();
 // NOW NEED: NOT A WORD, REVEAL WORD AT END IF DON'T GET
 function App() {
@@ -68,6 +75,11 @@ function App() {
     {
       const start = attempts * 5;
       const guess = typed.slice(start, start + 5).split("");
+      if (!wordExists(guess))
+      {
+        console.log("Word not in list");
+        return ;
+      }
       console.log(answer);
       console.log(guess);
       if (guess.join("") === answer.join("")) {
