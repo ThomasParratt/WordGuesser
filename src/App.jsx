@@ -33,6 +33,7 @@ function App() {
   // NEW: store per-tile results as 'green' | 'orange' | 'gray' | null
   const [tileResults, setTileResults] = useState(Array(30).fill(null));
   const [win, setWin] = useState(false);
+  const [notWord, setNotWord] = useState(false);
   const [message, setMessage] = useState("Genius");
 
   const evaluateGuess = (guess) => {
@@ -78,6 +79,10 @@ function App() {
       if (!wordExists(guess))
       {
         console.log("Word not in list");
+        setNotWord(true);
+        setMessage("Word not in list");
+        setTyped(prev => prev.slice(0, -5));
+        setChars(prev => prev - 5);
         return ;
       }
       console.log(answer);
@@ -186,7 +191,7 @@ function App() {
           })}
         </div>
       </div>
-      {win && (
+      {win || notWord && (
         <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
       )}
       <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
