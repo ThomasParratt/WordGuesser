@@ -70,14 +70,9 @@ function App() {
   };
 
   const handleClick = (char, index) => {
-    if (win)
+    console.log("attempts: " + attempts);
+    if (win || attempts >= 6)
       return ;
-    if (attempts >= 6) //NEED TO GET THIS WORKING
-    {
-      console.log("here");
-      setWin(true);
-      setMessage("Better luck next time!");
-    }
     if (chars === 5 && index - 19 === 0) // ENTER
     {
       const start = attempts * 5;
@@ -115,6 +110,11 @@ function App() {
             console.log("Unknown");
         }
         console.log("WELL DONE!");
+      }
+      else if (attempts === 5)
+      {
+        setWin(true);
+        setMessage(answer);
       }
       const result = evaluateGuess(guess);
       // Update tile results
@@ -197,7 +197,7 @@ function App() {
           })}
         </div>
       </div>
-      {win || notWord && (
+      {(win || notWord) && (
         <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
       )}
       <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
