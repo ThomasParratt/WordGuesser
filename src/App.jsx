@@ -83,8 +83,6 @@ function App() {
         console.log("Word not in list");
         setNotWord(true);
         setMessage("Word not in list");
-        setTyped(prev => prev.slice(0, -5));
-        setChars(prev => prev - 5);
         return ;
       }
       console.log(answer);
