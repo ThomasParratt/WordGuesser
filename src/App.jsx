@@ -5,7 +5,6 @@ import words from "./assets/words.json";
 
 function getRandomWordArray() {
   const randomIndex = Math.floor(Math.random() * answers.length);
-
   return answers[randomIndex]
     .toUpperCase()
     .split("");
@@ -30,7 +29,6 @@ export default function App() {
   const [activeGray, setGray] = useState([]);
   const [chars, setChars] = useState(0);
   const [attempts, setAttempts] = useState(0);
-  // NEW: store per-tile results as 'green' | 'orange' | 'gray' | null
   const [tileResults, setTileResults] = useState(Array(30).fill(null));
   const [win, setWin] = useState(false);
   const [notWord, setNotWord] = useState(false);
@@ -43,7 +41,6 @@ export default function App() {
   const evaluateGuess = (guess) => {
     // guess is an array of 5 letters
     const result = Array(5).fill(null);
-
     // Count available letters for orange (exclude greens)
     const answerCounts = {};
     answer.forEach((l, i) => {
@@ -51,14 +48,12 @@ export default function App() {
         answerCounts[l] = (answerCounts[l] || 0) + 1;
       }
     });
-
     // First pass: greens
     guess.forEach((letter, i) => {
       if (letter === answer[i]) {
         result[i] = 'green';
       }
     });
-
     // Second pass: oranges and grays
     guess.forEach((letter, i) => {
       if (result[i] === 'green') return;
@@ -69,7 +64,6 @@ export default function App() {
         result[i] = 'gray';
       }
     });
-
     return result;
   };
 
