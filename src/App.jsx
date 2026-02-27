@@ -171,10 +171,11 @@ function App() {
             newGray.push(keyIndex);
         }
       });
-
-      setGreen(newGreen);
-      setOrange(newOrange);
-      setGray(newGray);
+      setTimeout(() => {
+        setGreen(newGreen);
+        setOrange(newOrange);
+        setGray(newGray);
+      }, 1200);
       setAttempts(prev => prev + 1);
       setChars(0);
     }
