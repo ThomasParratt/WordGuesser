@@ -36,6 +36,10 @@ function App() {
   const [notWord, setNotWord] = useState(false);
   const [message, setMessage] = useState("Genius");
 
+  const [flippingRow, setFlippingRow] = useState(null);
+  const [shakingRow, setShakingRow] = useState(null);
+  const [bouncingRow, setBouncingRow] = useState(null);
+
   const evaluateGuess = (guess) => {
     // guess is an array of 5 letters
     const result = Array(5).fill(null);
@@ -82,13 +86,25 @@ function App() {
       {
         console.log("Word not in list");
         setNotWord(true);
+        setShakingRow(attempts);
+        setTimeout(() => {
+          setShakingRow(null);
+        }, 400);
         setMessage("Word not in list");
         return ;
       }
+      setFlippingRow(attempts);
+      setTimeout(() => {
+        setFlippingRow(null);
+      }, 1200);
       console.log(answer);
       console.log(guess);
       if (guess.join("") === answer.join("")) {
         setWin(true);
+        setBouncingRow(attempts);
+        setTimeout(() => {
+          setBouncingRow(null);
+        }, 1000);
         switch (attempts) {
           case 1:
             setMessage("Magnificent");
@@ -121,7 +137,15 @@ function App() {
       result.forEach((r, i) => {
         newTileResults[start + i] = r;
       });
-      setTileResults(newTileResults);
+      result.forEach((r, i) => {
+        setTimeout(() => {
+          setTileResults(prev => {
+            const updated = [...prev];
+            updated[start + i] = r;
+            return updated;
+          });
+        }, i * 150 + 300); // half flip timing
+      });
 
       // Update keyboard colors
       const newGreen = [...activeGreen];
@@ -188,7 +212,21 @@ function App() {
             return (
               <div
                 key={index}
-                className={`min-h-14 md:min-h-20 aspect-square flex items-center justify-center text-3xl md:text-4xl font-bold ${bgClass}`}
+                style={
+                  flippingRow === Math.floor(index / 5)
+                    ? { animationDelay: `${(index % 5) * 150}ms` }
+                    : bouncingRow === Math.floor(index / 5)
+                    ? { animationDelay: `${(index % 5) * 100}ms` }
+                    : {}
+                }
+                className={`
+                  min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
+                  text-3xl md:text-4xl font-bold 
+                  ${bgClass}
+                  ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
+                  ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
+                  ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
+                `}
               >
                 {letter}
               </div>
