@@ -20,7 +20,7 @@ function wordExists(charArray) {
 
 const answer = getRandomWordArray();
 
-function App() {
+export default function App() {
   const squares = Array.from({ length: 30 });
   const alphabet = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
 
@@ -291,5 +291,3 @@ function App() {
     </section>
   );
 }
-
-export default App
