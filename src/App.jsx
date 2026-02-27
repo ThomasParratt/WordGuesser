@@ -101,10 +101,14 @@ function App() {
       console.log(guess);
       if (guess.join("") === answer.join("")) {
         setWin(true);
-        setBouncingRow(attempts);
+        setFlippingRow(attempts);
+
+        // Wait for flip to finish before bouncing
         setTimeout(() => {
-          setBouncingRow(null);
-        }, 1000);
+          setFlippingRow(null);
+          setBouncingRow(attempts);
+          setTimeout(() => setBouncingRow(null), 1000);
+        }, 1200); // match your flip total duration
         switch (attempts) {
           case 1:
             setMessage("Magnificent");
