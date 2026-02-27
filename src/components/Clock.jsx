@@ -28,7 +28,7 @@ export default function Clock() {
     const [activeOrange, setOrange] = useState([]);
     const [activeGray, setGray] = useState([]);
     const [chars, setChars] = useState(0);
-    const [attempts, setAttempts] = useState(0);
+    const [attempts, setAttempts] = useState(2);
     const [tileResults, setTileResults] = useState(Array(30).fill(null));
     const [win, setWin] = useState(false);
     const [notWord, setNotWord] = useState(false);
@@ -170,7 +170,7 @@ export default function Clock() {
             setOrange(newOrange);
             setGray(newGray);
         }, 1200);
-        setAttempts(prev => prev + 1);
+        //setAttempts(prev => prev + 1);
         setChars(0);
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR
@@ -219,12 +219,12 @@ export default function Clock() {
                         : {}
                     }
                     className={`
-                    min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
-                    text-3xl md:text-4xl font-bold 
-                    ${bgClass}
-                    ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
-                    ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
-                    ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
+                        min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
+                        text-3xl md:text-4xl font-bold 
+                        ${bgClass}
+                        ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
+                        ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
+                        ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
                     `}
                 >
                     {letter}
