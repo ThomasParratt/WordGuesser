@@ -28,7 +28,7 @@ export default function Clock() {
     const [activeOrange, setOrange] = useState([]);
     const [activeGray, setGray] = useState([]);
     const [chars, setChars] = useState(0);
-    const [attempts, setAttempts] = useState(2);
+    const [attempts, setAttempts] = useState(0);
     const [tileResults, setTileResults] = useState(Array(30).fill(null));
     const [win, setWin] = useState(false);
     const [notWord, setNotWord] = useState(false);
@@ -37,6 +37,8 @@ export default function Clock() {
     const [flippingRow, setFlippingRow] = useState(null);
     const [shakingRow, setShakingRow] = useState(null);
     const [bouncingRow, setBouncingRow] = useState(null);
+
+    const guessRow = 2;
 
     const evaluateGuess = (guess) => {
         // guess is an array of 5 letters
@@ -74,20 +76,21 @@ export default function Clock() {
         return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
+            console.log("typed:" + typed);
             const start = attempts * 5;
             const guess = typed.slice(start, start + 5).split("");
             if (!wordExists(guess))
             {
                 console.log("Word not in list");
                 setNotWord(true);
-                setShakingRow(attempts);
+                setShakingRow(guessRow);
                 setTimeout(() => {
-                setShakingRow(null);
+                    setShakingRow(null);
                 }, 400);
                 setMessage("Word not in list");
                 return ;
             }
-            setFlippingRow(attempts);
+            setFlippingRow(guessRow);
             setTimeout(() => {
                 setFlippingRow(null);
             }, 1200);
@@ -95,13 +98,13 @@ export default function Clock() {
             console.log(guess);
             if (guess.join("") === answer.join("")) {
                 setWin(true);
-                setFlippingRow(attempts);
+                setFlippingRow(guessRow);
 
                 // Wait for flip to finish before bouncing
                 setTimeout(() => {
-                setFlippingRow(null);
-                setBouncingRow(attempts);
-                setTimeout(() => setBouncingRow(null), 1000);
+                    setFlippingRow(null);
+                    setBouncingRow(guessRow);
+                    setTimeout(() => setBouncingRow(null), 1000);
                 }, 1200); // match your flip total duration
                 switch (attempts) {
                 case 1:
@@ -137,11 +140,11 @@ export default function Clock() {
             });
             result.forEach((r, i) => {
                 setTimeout(() => {
-                setTileResults(prev => {
-                    const updated = [...prev];
-                    updated[start + i] = r;
-                    return updated;
-                });
+                    setTileResults(prev => {
+                        const updated = [...prev];
+                        updated[start + i] = r;
+                        return updated;
+                    });
                 }, i * 150 + 300); // half flip timing
             });
 
@@ -170,7 +173,7 @@ export default function Clock() {
                 setOrange(newOrange);
                 setGray(newGray);
             }, 1200);
-            //setAttempts(prev => prev + 1);
+            setAttempts(prev => prev + 1);
             setChars(0);
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR

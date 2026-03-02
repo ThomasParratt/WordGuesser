@@ -74,6 +74,7 @@ export default function GuessInFive() {
         return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
+            console.log("typed:" + typed);
             const start = attempts * 5;
             const guess = typed.slice(start, start + 5).split("");
             if (!wordExists(guess))
