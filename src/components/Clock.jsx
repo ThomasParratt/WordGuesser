@@ -215,11 +215,11 @@ export default function Clock() {
                 <div
                     key={index}
                     style={
-                    flippingRow === Math.floor(index / 5)
-                        ? { animationDelay: `${(index % 5) * 150}ms` }
-                        : bouncingRow === Math.floor(index / 5)
-                        ? { animationDelay: `${(index % 5) * 100}ms` }
-                        : {}
+                        flippingRow === Math.floor(index / 5)
+                            ? { animationDelay: `${(index % 5) * 150}ms` }
+                            : bouncingRow === Math.floor(index / 5)
+                            ? { animationDelay: `${(index % 5) * 100}ms` }
+                            : {}
                     }
                     className={`
                         min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
