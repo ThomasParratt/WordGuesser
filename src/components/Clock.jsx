@@ -74,118 +74,118 @@ export default function Clock() {
         return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
-        const start = attempts * 5;
-        const guess = typed.slice(start, start + 5).split("");
-        if (!wordExists(guess))
-        {
-            console.log("Word not in list");
-            setNotWord(true);
-            setShakingRow(attempts);
-            setTimeout(() => {
-            setShakingRow(null);
-            }, 400);
-            setMessage("Word not in list");
-            return ;
-        }
-        setFlippingRow(attempts);
-        setTimeout(() => {
-            setFlippingRow(null);
-        }, 1200);
-        console.log(answer);
-        console.log(guess);
-        if (guess.join("") === answer.join("")) {
-            setWin(true);
+            const start = attempts * 5;
+            const guess = typed.slice(start, start + 5).split("");
+            if (!wordExists(guess))
+            {
+                console.log("Word not in list");
+                setNotWord(true);
+                setShakingRow(attempts);
+                setTimeout(() => {
+                setShakingRow(null);
+                }, 400);
+                setMessage("Word not in list");
+                return ;
+            }
             setFlippingRow(attempts);
+            setTimeout(() => {
+                setFlippingRow(null);
+            }, 1200);
+            console.log(answer);
+            console.log(guess);
+            if (guess.join("") === answer.join("")) {
+                setWin(true);
+                setFlippingRow(attempts);
 
-            // Wait for flip to finish before bouncing
-            setTimeout(() => {
-            setFlippingRow(null);
-            setBouncingRow(attempts);
-            setTimeout(() => setBouncingRow(null), 1000);
-            }, 1200); // match your flip total duration
-            switch (attempts) {
-            case 1:
-                setMessage("Magnificent");
-                break;
-            case 2:
-                setMessage("Impressive");
-                break;
-            case 3:
-                setMessage("Splendid");
-                break;
-            case 4:
-                setMessage("Great");
-                break;
-            case 5:
-                setMessage("Phew");
-                break;
-            default:
-                console.log("Unknown");
+                // Wait for flip to finish before bouncing
+                setTimeout(() => {
+                setFlippingRow(null);
+                setBouncingRow(attempts);
+                setTimeout(() => setBouncingRow(null), 1000);
+                }, 1200); // match your flip total duration
+                switch (attempts) {
+                case 1:
+                    setMessage("Magnificent");
+                    break;
+                case 2:
+                    setMessage("Impressive");
+                    break;
+                case 3:
+                    setMessage("Splendid");
+                    break;
+                case 4:
+                    setMessage("Great");
+                    break;
+                case 5:
+                    setMessage("Phew");
+                    break;
+                default:
+                    console.log("Unknown");
+                }
+                console.log("WELL DONE!");
             }
-            console.log("WELL DONE!");
-        }
-        else if (attempts === 5)
-        {
-            setWin(true);
-            setMessage(answer);
-        }
-        const result = evaluateGuess(guess);
-        // Update tile results
-        const newTileResults = [...tileResults];
-        result.forEach((r, i) => {
-            newTileResults[start + i] = r;
-        });
-        result.forEach((r, i) => {
-            setTimeout(() => {
-            setTileResults(prev => {
-                const updated = [...prev];
-                updated[start + i] = r;
-                return updated;
+            else if (attempts === 5)
+            {
+                setWin(true);
+                setMessage(answer);
+            }
+            const result = evaluateGuess(guess);
+            // Update tile results
+            const newTileResults = [...tileResults];
+            result.forEach((r, i) => {
+                newTileResults[start + i] = r;
             });
-            }, i * 150 + 300); // half flip timing
-        });
+            result.forEach((r, i) => {
+                setTimeout(() => {
+                setTileResults(prev => {
+                    const updated = [...prev];
+                    updated[start + i] = r;
+                    return updated;
+                });
+                }, i * 150 + 300); // half flip timing
+            });
 
-        // Update keyboard colors
-        const newGreen = [...activeGreen];
-        const newOrange = [...activeOrange];
-        const newGray = [...activeGray];
+            // Update keyboard colors
+            const newGreen = [...activeGreen];
+            const newOrange = [...activeOrange];
+            const newGray = [...activeGray];
 
-        guess.forEach((letter, i) => {
-            const keyIndex = alphabet.indexOf(letter);
-            if (result[i] === 'green') {
-            if (!newGreen.includes(keyIndex)) newGreen.push(keyIndex);
-            // Remove from orange if it was there before
-            const oi = newOrange.indexOf(keyIndex);
-            if (oi !== -1) newOrange.splice(oi, 1);
-            } else if (result[i] === 'orange') {
-            if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                newOrange.push(keyIndex);
-            } else {
-            if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                newGray.push(keyIndex);
-            }
-        });
-        setTimeout(() => {
-            setGreen(newGreen);
-            setOrange(newOrange);
-            setGray(newGray);
-        }, 1200);
-        //setAttempts(prev => prev + 1);
-        setChars(0);
+            guess.forEach((letter, i) => {
+                const keyIndex = alphabet.indexOf(letter);
+                if (result[i] === 'green') {
+                if (!newGreen.includes(keyIndex)) newGreen.push(keyIndex);
+                // Remove from orange if it was there before
+                const oi = newOrange.indexOf(keyIndex);
+                if (oi !== -1) newOrange.splice(oi, 1);
+                } else if (result[i] === 'orange') {
+                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                    newOrange.push(keyIndex);
+                } else {
+                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                    newGray.push(keyIndex);
+                }
+            });
+            setTimeout(() => {
+                setGreen(newGreen);
+                setOrange(newOrange);
+                setGray(newGray);
+            }, 1200);
+            //setAttempts(prev => prev + 1);
+            setChars(0);
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR
         {
-        if (chars < 5) {
-            setChars(prev => prev + 1);
-            setTyped(prev => prev + char);
-        }
+            if (chars < 5) {
+                setChars(prev => prev + 1);
+                setTyped(prev => prev + char);
+            }
         }
         else if (index - 19 === 8) // BACK
         {
-        if (chars !== 0) {
-            setTyped(prev => prev.slice(0, -1));
-            setChars(prev => prev - 1);
-        }
+            if (chars !== 0) {
+                setTyped(prev => prev.slice(0, -1));
+                setChars(prev => prev - 1);
+            }
         }
     };
 
@@ -199,13 +199,13 @@ export default function Clock() {
 
                 let bgClass = "bg-white text-black border-2 border-gray-300";
                 if (result === 'green') {
-                bgClass = "bg-green-600 text-white border-0";
+                    bgClass = "bg-green-600 text-white border-0";
                 } else if (result === 'orange') {
-                bgClass = "bg-amber-400 text-white border-0";
+                    bgClass = "bg-amber-400 text-white border-0";
                 } else if (result === 'gray') {
-                bgClass = "bg-gray-600 text-white border-0";
+                    bgClass = "bg-gray-600 text-white border-0";
                 } else if (letter) {
-                bgClass = "border-2 border-gray-600";
+                    bgClass = "border-2 border-gray-600";
                 }
 
                 return (

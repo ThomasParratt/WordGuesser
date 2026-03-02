@@ -179,9 +179,9 @@ export default function GuessInFive() {
                 setChars(prev => prev + 1);
                 setTyped(prev => prev + char);
             }
-            }
-            else if (index - 19 === 8) // BACK
-            {
+        }
+        else if (index - 19 === 8) // BACK
+        {
             if (chars !== 0) {
                 setTyped(prev => prev.slice(0, -1));
                 setChars(prev => prev - 1);
