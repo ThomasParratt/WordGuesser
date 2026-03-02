@@ -74,15 +74,15 @@ export default function GuessInFive() {
         return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
-        const start = attempts * 5;
-        const guess = typed.slice(start, start + 5).split("");
+            const start = attempts * 5;
+            const guess = typed.slice(start, start + 5).split("");
         if (!wordExists(guess))
         {
             console.log("Word not in list");
             setNotWord(true);
             setShakingRow(attempts);
             setTimeout(() => {
-            setShakingRow(null);
+                setShakingRow(null);
             }, 400);
             setMessage("Word not in list");
             return ;
@@ -99,9 +99,9 @@ export default function GuessInFive() {
 
             // Wait for flip to finish before bouncing
             setTimeout(() => {
-            setFlippingRow(null);
-            setBouncingRow(attempts);
-            setTimeout(() => setBouncingRow(null), 1000);
+                setFlippingRow(null);
+                setBouncingRow(attempts);
+                setTimeout(() => setBouncingRow(null), 1000);
             }, 1200); // match your flip total duration
             switch (attempts) {
             case 1:
@@ -175,17 +175,17 @@ export default function GuessInFive() {
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR
         {
-        if (chars < 5) {
-            setChars(prev => prev + 1);
-            setTyped(prev => prev + char);
-        }
-        }
-        else if (index - 19 === 8) // BACK
-        {
-        if (chars !== 0) {
-            setTyped(prev => prev.slice(0, -1));
-            setChars(prev => prev - 1);
-        }
+            if (chars < 5) {
+                setChars(prev => prev + 1);
+                setTyped(prev => prev + char);
+            }
+            }
+            else if (index - 19 === 8) // BACK
+            {
+            if (chars !== 0) {
+                setTyped(prev => prev.slice(0, -1));
+                setChars(prev => prev - 1);
+            }
         }
     };
 
@@ -199,13 +199,13 @@ export default function GuessInFive() {
 
                 let bgClass = "bg-white text-black border-2 border-gray-300";
                 if (result === 'green') {
-                bgClass = "bg-green-600 text-white border-0";
+                    bgClass = "bg-green-600 text-white border-0";
                 } else if (result === 'orange') {
-                bgClass = "bg-amber-400 text-white border-0";
+                    bgClass = "bg-amber-400 text-white border-0";
                 } else if (result === 'gray') {
-                bgClass = "bg-gray-600 text-white border-0";
+                    bgClass = "bg-gray-600 text-white border-0";
                 } else if (letter) {
-                bgClass = "border-2 border-gray-600";
+                    bgClass = "border-2 border-gray-600";
                 }
 
                 return (
