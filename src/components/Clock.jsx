@@ -73,7 +73,7 @@ export default function Clock() {
         setNotWord(false);
         console.log("attempts: " + attempts);
         if (win || attempts >= 6)
-        return ;
+            return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
             console.log("typed:" + typed);
