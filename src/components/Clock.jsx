@@ -198,44 +198,48 @@ export default function Clock() {
         <section>
         <div className="w-full flex justify-center pt-16 md:pt-20 pb-6 md:pb-12">
             <div className="grid grid-cols-5 gap-1">
-            {squares.map((_, index) => {
-                const letter = typed[index];
-                const result = tileResults[index];
+                {squares.map((_, index) => {
+                    const letter = typed[index];
+                    const result = tileResults[index];
 
-                let bgClass = "bg-white text-black border-2 border-gray-300";
-                if (result === 'green') {
-                    bgClass = "bg-green-600 text-white border-0";
-                } else if (result === 'orange') {
-                    bgClass = "bg-amber-400 text-white border-0";
-                } else if (result === 'gray') {
-                    bgClass = "bg-gray-600 text-white border-0";
-                } else if (letter) {
-                    bgClass = "border-2 border-gray-600";
-                }
-
-                return (
-                <div
-                    key={index}
-                    style={
-                        flippingRow === Math.floor(index / 5)
-                            ? { animationDelay: `${(index % 5) * 150}ms` }
-                            : bouncingRow === Math.floor(index / 5)
-                            ? { animationDelay: `${(index % 5) * 100}ms` }
-                            : {}
+                    let bgClass = "bg-white text-black border-2 border-gray-300";
+                    if (guessRow === Math.floor(index / 5))
+                    {
+                        if (result === 'green') {
+                            bgClass = "bg-green-600 text-white border-0";
+                        } else if (result === 'orange') {
+                            bgClass = "bg-amber-400 text-white border-0";
+                        } else if (result === 'gray') {
+                            bgClass = "bg-gray-600 text-white border-0";
+                        } else if (letter) {
+                            bgClass = "border-2 border-gray-600";
+                        }
                     }
-                    className={`
-                        min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
-                        text-3xl md:text-4xl font-bold 
-                        ${bgClass}
-                        ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
-                        ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
-                        ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
-                    `}
-                >
-                    {letter}
-                </div>
-                );
-            })}
+                    
+
+                    return (
+                    <div
+                        key={index}
+                        style={
+                            flippingRow === Math.floor(index / 5)
+                                ? { animationDelay: `${(index % 5) * 150}ms` }
+                                : bouncingRow === Math.floor(index / 5)
+                                ? { animationDelay: `${(index % 5) * 100}ms` }
+                                : {}
+                        }
+                        className={`
+                            min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
+                            text-3xl md:text-4xl font-bold 
+                            ${bgClass}
+                            ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
+                            ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
+                            ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
+                        `}
+                    >
+                        {Math.floor(index / 5) === 2 ? letter : ""}
+                    </div>
+                    );
+                })}
             </div>
         </div>
         {(win || notWord) && (
