@@ -70,9 +70,9 @@ export default function Clock() {
     };
 
     const handleClick = (char, index) => {
-        //if (typed.length === 6) // GETTING THERE!!
-        //    setTyped("");
         setNotWord(false);
+        //if (typed.length === 5) // GETTING THERE!!
+        //    setTyped("");
         console.log("attempts: " + attempts);
         if (win || attempts >= 6)
             return ;

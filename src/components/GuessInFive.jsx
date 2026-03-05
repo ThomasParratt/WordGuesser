@@ -69,6 +69,8 @@ export default function GuessInFive() {
 
     const handleClick = (char, index) => {
         setNotWord(false);
+        //if (typed.length === 5) // GETTING THERE!!
+        //    setTyped("");
         console.log("attempts: " + attempts);
         if (win || attempts >= 6)
             return ;
