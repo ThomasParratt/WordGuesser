@@ -20,7 +20,6 @@ function wordExists(charArray) {
 const answer = getRandomWordArray();
 
 export default function Clock() {
-    const squares = Array.from({ length: 30 });
     const alphabet = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'];
 
     const [typed, setTyped] = useState("");
@@ -37,8 +36,6 @@ export default function Clock() {
     const [flippingRow, setFlippingRow] = useState(null);
     const [shakingRow, setShakingRow] = useState(null);
     const [bouncingRow, setBouncingRow] = useState(null);
-
-    const guessRow = 2;
 
     const evaluateGuess = (guess) => {
         // guess is an array of 5 letters
@@ -74,7 +71,7 @@ export default function Clock() {
         //if (typed.length === 5) // GETTING THERE!!
         //    setTyped("");
         console.log("attempts: " + attempts);
-        if (win || attempts >= 6)
+        if (win)
             return ;
         if (chars === 5 && index - 19 === 0) // ENTER
         {
@@ -85,14 +82,14 @@ export default function Clock() {
             {
                 console.log("Word not in list");
                 setNotWord(true);
-                setShakingRow(guessRow);
+                setShakingRow(attempts);
                 setTimeout(() => {
                     setShakingRow(null);
                 }, 400);
                 setMessage("Word not in list");
                 return ;
             }
-            setFlippingRow(guessRow);
+            setFlippingRow(attempts);
             setTimeout(() => {
                 setFlippingRow(null);
             }, 1200);
@@ -100,12 +97,12 @@ export default function Clock() {
             console.log(guess);
             if (guess.join("") === answer.join("")) {
                 setWin(true);
-                setFlippingRow(guessRow);
+                setFlippingRow(attempts);
 
                 // Wait for flip to finish before bouncing
                 setTimeout(() => {
                     setFlippingRow(null);
-                    setBouncingRow(guessRow);
+                    setBouncingRow(attempts);
                     setTimeout(() => setBouncingRow(null), 1000);
                 }, 1200); // match your flip total duration
                 switch (attempts) {
@@ -131,8 +128,8 @@ export default function Clock() {
             }
             else if (attempts === 5)
             {
-                setWin(true);
-                setMessage(answer);
+                //setWin(true);
+                //setMessage(answer);
             }
             const result = evaluateGuess(guess);
             // Update tile results
@@ -142,11 +139,11 @@ export default function Clock() {
             });
             result.forEach((r, i) => {
                 setTimeout(() => {
-                    setTileResults(prev => {
-                        const updated = [...prev];
-                        updated[start + i] = r;
-                        return updated;
-                    });
+                setTileResults(prev => {
+                    const updated = [...prev];
+                    updated[start + i] = r;
+                    return updated;
+                });
                 }, i * 150 + 300); // half flip timing
             });
 
@@ -193,53 +190,51 @@ export default function Clock() {
             }
         }
     };
-
+    
+    const squares = Array.from({ length: (attempts + 1) * 5 });
+        
     return (
         <section>
         <div className="w-full flex justify-center pt-16 md:pt-20 pb-6 md:pb-12">
             <div className="grid grid-cols-5 gap-1">
-                {squares.map((_, index) => {
-                    const letter = typed[index];
-                    const result = tileResults[index];
+            {squares.map((_, index) => {
+                const letter = typed[index];
+                const result = tileResults[index];
 
-                    let bgClass = "bg-white text-black border-2 border-gray-300";
-                    if (guessRow === Math.floor(index / 5))
-                    {
-                        if (result === 'green') {
-                            bgClass = "bg-green-600 text-white border-0";
-                        } else if (result === 'orange') {
-                            bgClass = "bg-amber-400 text-white border-0";
-                        } else if (result === 'gray') {
-                            bgClass = "bg-gray-600 text-white border-0";
-                        } else if (letter) {
-                            bgClass = "border-2 border-gray-600";
-                        }
+                let bgClass = "bg-white text-black border-2 border-gray-300";
+                if (result === 'green') {
+                    bgClass = "bg-green-600 text-white border-0";
+                } else if (result === 'orange') {
+                    bgClass = "bg-amber-400 text-white border-0";
+                } else if (result === 'gray') {
+                    bgClass = "bg-gray-600 text-white border-0";
+                } else if (letter) {
+                    bgClass = "border-2 border-gray-600";
+                }
+
+                return (
+                <div
+                    key={index}
+                    style={
+                    flippingRow === Math.floor(index / 5)
+                        ? { animationDelay: `${(index % 5) * 150}ms` }
+                        : bouncingRow === Math.floor(index / 5)
+                        ? { animationDelay: `${(index % 5) * 100}ms` }
+                        : {}
                     }
-                    
-
-                    return (
-                    <div
-                        key={index}
-                        style={
-                            flippingRow === Math.floor(index / 5)
-                                ? { animationDelay: `${(index % 5) * 150}ms` }
-                                : bouncingRow === Math.floor(index / 5)
-                                ? { animationDelay: `${(index % 5) * 100}ms` }
-                                : {}
-                        }
-                        className={`
-                            min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
-                            text-3xl md:text-4xl font-bold 
-                            ${bgClass}
-                            ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
-                            ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
-                            ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
-                        `}
-                    >
-                        {Math.floor(index / 5) === 2 ? letter : ""}
-                    </div>
-                    );
-                })}
+                    className={`
+                        min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
+                        text-3xl md:text-4xl font-bold 
+                        ${bgClass}
+                        ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
+                        ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
+                        ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
+                    `}
+                >
+                    {letter}
+                </div>
+                );
+            })}
             </div>
         </div>
         {(win || notWord) && (
