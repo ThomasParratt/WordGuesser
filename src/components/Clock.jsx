@@ -116,25 +116,7 @@ export default function Clock() {
                     setBouncingRow(attempts);
                     setTimeout(() => setBouncingRow(null), 1000);
                 }, 1200); // match your flip total duration
-                switch (attempts) {
-                case 1:
-                    setMessage("Magnificent");
-                    break;
-                case 2:
-                    setMessage("Impressive");
-                    break;
-                case 3:
-                    setMessage("Splendid");
-                    break;
-                case 4:
-                    setMessage("Great");
-                    break;
-                case 5:
-                    setMessage("Phew");
-                    break;
-                default:
-                    console.log("Unknown");
-                }
+                setMessage("Completed in " + seconds + " seconds");
                 console.log("WELL DONE!");
             }
             else if (attempts === 5)
@@ -250,10 +232,7 @@ export default function Clock() {
             })}
             </div>
         </div>
-        {(win || notWord) && (
-            <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
-        )}
-        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{seconds}</article>
+        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{win || notWord ? message : seconds}</article>
         <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
             {alphabet.slice(0, 10).map((value, index) => {
             let bgClass = "bg-gray-300 text-black";
