@@ -230,7 +230,7 @@ export default function GuessInFive() {
                         ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
                     `}
                 >
-                    {Math.floor(index / 5) === 2 ? letter : ""}
+                    {letter}
                 </div>
                 );
             })}
