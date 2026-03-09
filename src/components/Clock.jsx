@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import back from '../assets/back.svg'
 import answers from "../assets/answers.json";
 import words from "../assets/words.json";
@@ -36,6 +36,15 @@ export default function Clock() {
     const [flippingRow, setFlippingRow] = useState(null);
     const [shakingRow, setShakingRow] = useState(null);
     const [bouncingRow, setBouncingRow] = useState(null);
+    const [seconds, setSeconds] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+        setSeconds(prev => prev + 1);
+        }, 1000);
+
+        return () => clearInterval(interval); // cleanup
+    }, []);
 
     const evaluateGuess = (guess) => {
         // guess is an array of 5 letters
@@ -244,6 +253,7 @@ export default function Clock() {
         {(win || notWord) && (
             <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{message}</article>
         )}
+        <article className={"absolute top-12 left-1/2 z-10 w-fit rounded-md bg-gray-800 text-white text-center text-sm md:text-2xl font-semibold p-3 md:p-4 -translate-x-1/2 -translate-y-1/2"}>{seconds}</article>
         <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
             {alphabet.slice(0, 10).map((value, index) => {
             let bgClass = "bg-gray-300 text-black";
