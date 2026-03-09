@@ -78,6 +78,7 @@ export default function Clock() {
             console.log("typed:" + typed);
             const start = attempts * 5;
             const guess = typed.slice(start, start + 5).split("");
+            let wine = false;
             if (!wordExists(guess))
             {
                 console.log("Word not in list");
@@ -97,6 +98,7 @@ export default function Clock() {
             console.log(guess);
             if (guess.join("") === answer.join("")) {
                 setWin(true);
+                wine = true;
                 setFlippingRow(attempts);
 
                 // Wait for flip to finish before bouncing
@@ -171,8 +173,10 @@ export default function Clock() {
                 setGreen(newGreen);
                 setOrange(newOrange);
                 setGray(newGray);
-                setAttempts(prev => prev + 1);
-                setChars(0);
+                if (!wine) {
+                    setAttempts(prev => prev + 1);
+                    setChars(0);
+                }
             }, 1200);
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR
