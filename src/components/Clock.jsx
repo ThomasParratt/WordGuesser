@@ -213,26 +213,26 @@ export default function Clock() {
                 }
 
                 return (
-                <div
-                    key={index}
-                    style={
-                    flippingRow === Math.floor(index / 5)
-                        ? { animationDelay: `${(index % 5) * 150}ms` }
-                        : bouncingRow === Math.floor(index / 5)
-                        ? { animationDelay: `${(index % 5) * 100}ms` }
-                        : {}
-                    }
-                    className={`
-                        min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
-                        text-3xl md:text-4xl font-bold 
-                        ${bgClass}
-                        ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
-                        ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
-                        ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
-                    `}
-                >
-                    {letter}
-                </div>
+                    <div
+                        key={index}
+                        style={
+                        flippingRow === Math.floor(index / 5)
+                            ? { animationDelay: `${(index % 5) * 150}ms` }
+                            : bouncingRow === Math.floor(index / 5)
+                            ? { animationDelay: `${(index % 5) * 100}ms` }
+                            : {}
+                        }
+                        className={`
+                            min-h-14 md:min-h-20 aspect-square flex items-center justify-center 
+                            text-3xl md:text-4xl font-bold 
+                            ${bgClass}
+                            ${flippingRow === Math.floor(index / 5) ? "animate-flip" : ""}
+                            ${shakingRow === Math.floor(index / 5) ? "animate-shake" : ""}
+                            ${bouncingRow === Math.floor(index / 5) ? "animate-bounceTile" : ""}
+                        `}
+                    >
+                        {letter}
+                    </div>
                 );
             })}
             </div>
