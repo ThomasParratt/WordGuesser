@@ -171,9 +171,9 @@ export default function Clock() {
                 setGreen(newGreen);
                 setOrange(newOrange);
                 setGray(newGray);
+                setAttempts(prev => prev + 1);
+                setChars(0);
             }, 1200);
-            setAttempts(prev => prev + 1);
-            setChars(0);
         }
         else if (index - 19 !== 0 && index - 19 !== 8) // SELECTING CHAR
         {
