@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import back from '../assets/back.svg'
 import answers from "../assets/answers.json";
 import words from "../assets/words.json";
@@ -38,39 +38,51 @@ export default function GuessInFive() {
     const [shakingRow, setShakingRow] = useState(null);
     const [bouncingRow, setBouncingRow] = useState(null);
 
+    useEffect(() => {
+        const handleKey = (e) => {
+            const key = e.key.toUpperCase();
+            if (key === "ENTER") handleClick("ENTER", 19);
+            else if (key === "BACKSPACE") handleClick("BACK", 27);
+            else if (/^[A-Z]$/.test(key)) {
+                const index = alphabet.indexOf(key);
+                if (index !== -1) handleClick(key, index);
+            }
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [chars, attempts, typed, answer]);
+
     const evaluateGuess = (guess) => {
         // guess is an array of 5 letters
         const result = Array(5).fill(null);
         // Count available letters for orange (exclude greens)
         const answerCounts = {};
         answer.forEach((l, i) => {
-        if (guess[i] !== l) {
-            answerCounts[l] = (answerCounts[l] || 0) + 1;
+            if (guess[i] !== l) {
+                answerCounts[l] = (answerCounts[l] || 0) + 1;
         }
         });
         // First pass: greens
         guess.forEach((letter, i) => {
-        if (letter === answer[i]) {
-            result[i] = 'green';
-        }
+            if (letter === answer[i]) {
+                result[i] = 'green';
+            }
         });
         // Second pass: oranges and grays
         guess.forEach((letter, i) => {
-        if (result[i] === 'green') return;
-        if (answerCounts[letter] > 0) {
-            result[i] = 'orange';
-            answerCounts[letter]--;
-        } else {
-            result[i] = 'gray';
-        }
+            if (result[i] === 'green') return;
+            if (answerCounts[letter] > 0) {
+                result[i] = 'orange';
+                answerCounts[letter]--;
+            } else {
+                result[i] = 'gray';
+            }
         });
         return result;
     };
 
     const handleClick = (char, index) => {
         setNotWord(false);
-        //if (typed.length === 5) // GETTING THERE!!
-        //    setTyped("");
         console.log("attempts: " + attempts);
         if (win || attempts >= 6)
             return ;
@@ -107,23 +119,23 @@ export default function GuessInFive() {
                     setTimeout(() => setBouncingRow(null), 1000);
                 }, 1200); // match your flip total duration
                 switch (attempts) {
-                case 1:
-                    setMessage("Magnificent");
-                    break;
-                case 2:
-                    setMessage("Impressive");
-                    break;
-                case 3:
-                    setMessage("Splendid");
-                    break;
-                case 4:
-                    setMessage("Great");
-                    break;
-                case 5:
-                    setMessage("Phew");
-                    break;
-                default:
-                    console.log("Unknown");
+                    case 1:
+                        setMessage("Magnificent");
+                        break;
+                    case 2:
+                        setMessage("Impressive");
+                        break;
+                    case 3:
+                        setMessage("Splendid");
+                        break;
+                    case 4:
+                        setMessage("Great");
+                        break;
+                    case 5:
+                        setMessage("Phew");
+                        break;
+                    default:
+                        console.log("Unknown");
                 }
                 console.log("WELL DONE!");
             }

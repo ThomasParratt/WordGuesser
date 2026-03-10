@@ -39,6 +39,20 @@ export default function Clock() {
     const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
+        const handleKey = (e) => {
+            const key = e.key.toUpperCase();
+            if (key === "ENTER") handleClick("ENTER", 19);
+            else if (key === "BACKSPACE") handleClick("BACK", 27);
+            else if (/^[A-Z]$/.test(key)) {
+                const index = alphabet.indexOf(key);
+                if (index !== -1) handleClick(key, index);
+            }
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [chars, attempts, typed, answer]);
+
+    useEffect(() => {
         const interval = setInterval(() => {
         setSeconds(prev => prev + 1);
         }, 1000);
@@ -58,27 +72,25 @@ export default function Clock() {
         });
         // First pass: greens
         guess.forEach((letter, i) => {
-        if (letter === answer[i]) {
-            result[i] = 'green';
-        }
+            if (letter === answer[i]) {
+                result[i] = 'green';
+            }
         });
         // Second pass: oranges and grays
         guess.forEach((letter, i) => {
-        if (result[i] === 'green') return;
-        if (answerCounts[letter] > 0) {
-            result[i] = 'orange';
-            answerCounts[letter]--;
-        } else {
-            result[i] = 'gray';
-        }
+            if (result[i] === 'green') return;
+            if (answerCounts[letter] > 0) {
+                result[i] = 'orange';
+                answerCounts[letter]--;
+            } else {
+                result[i] = 'gray';
+            }
         });
         return result;
     };
 
     const handleClick = (char, index) => {
         setNotWord(false);
-        //if (typed.length === 5) // GETTING THERE!!
-        //    setTyped("");
         console.log("attempts: " + attempts);
         if (win)
             return ;
@@ -153,11 +165,11 @@ export default function Clock() {
                 const oi = newOrange.indexOf(keyIndex);
                 if (oi !== -1) newOrange.splice(oi, 1);
                 } else if (result[i] === 'orange') {
-                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                    newOrange.push(keyIndex);
-                } else {
-                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                    newGray.push(keyIndex);
+                    if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                        newOrange.push(keyIndex);
+                    } else {
+                    if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                        newGray.push(keyIndex);
                 }
             });
             setTimeout(() => {
