@@ -168,16 +168,16 @@ export default function GuessInFive() {
             guess.forEach((letter, i) => {
                 const keyIndex = alphabet.indexOf(letter);
                 if (result[i] === 'green') {
-                if (!newGreen.includes(keyIndex)) newGreen.push(keyIndex);
-                // Remove from orange if it was there before
-                const oi = newOrange.indexOf(keyIndex);
-                if (oi !== -1) newOrange.splice(oi, 1);
+                    if (!newGreen.includes(keyIndex)) newGreen.push(keyIndex);
+                    // Remove from orange if it was there before
+                    const oi = newOrange.indexOf(keyIndex);
+                    if (oi !== -1) newOrange.splice(oi, 1);
                 } else if (result[i] === 'orange') {
                 if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
                     newOrange.push(keyIndex);
                 } else {
-                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                    newGray.push(keyIndex);
+                    if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                        newGray.push(keyIndex);
                 }
             });
             setTimeout(() => {
