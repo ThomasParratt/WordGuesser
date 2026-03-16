@@ -253,48 +253,48 @@ export default function GuessInFive() {
             )}
             <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
                 {alphabet.slice(0, 10).map((value, index) => {
-                let bgClass = "bg-gray-300 text-black";
-                if (activeGreen.includes(index)) bgClass = "bg-green-600 text-white";
-                else if (activeOrange.includes(index)) bgClass = "bg-amber-400 text-white";
-                else if (activeGray.includes(index)) bgClass = "bg-gray-600 text-white";
-                return (
-                    <div key={index} onClick={() => handleClick(value, index)}
-                    className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
-                    {value}
-                    </div>
-                );
+                    let bgClass = "bg-gray-300 text-black";
+                    if (activeGreen.includes(index)) bgClass = "bg-green-600 text-white";
+                    else if (activeOrange.includes(index)) bgClass = "bg-amber-400 text-white";
+                    else if (activeGray.includes(index)) bgClass = "bg-gray-600 text-white";
+                    return (
+                        <div key={index} onClick={() => handleClick(value, index)}
+                        className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
+                        {value}
+                        </div>
+                    );
                 })}
             </div>
             <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
                 {alphabet.slice(10, 19).map((value, index) => {
-                let bgClass = "bg-gray-300 text-black";
-                if (activeGreen.includes(index + 10)) bgClass = "bg-green-600 text-white";
-                else if (activeOrange.includes(index + 10)) bgClass = "bg-amber-400 text-white";
-                else if (activeGray.includes(index + 10)) bgClass = "bg-gray-600 text-white";
-                return (
-                    <div key={index + 10} onClick={() => handleClick(value, index + 10)}
-                    className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
-                    {value}
-                    </div>
-                );
+                    let bgClass = "bg-gray-300 text-black";
+                    if (activeGreen.includes(index + 10)) bgClass = "bg-green-600 text-white";
+                    else if (activeOrange.includes(index + 10)) bgClass = "bg-amber-400 text-white";
+                    else if (activeGray.includes(index + 10)) bgClass = "bg-gray-600 text-white";
+                    return (
+                        <div key={index + 10} onClick={() => handleClick(value, index + 10)}
+                        className={`min-w-7 min-h-16 md:min-w-10 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center text-xl md:text-2xl font-bold ${bgClass}`}>
+                        {value}
+                        </div>
+                    );
                 })}
             </div>
             <div className="max-w-4xl mx-auto w-full justify-center flex gap-2 p-1">
                 {alphabet.slice(19, 28).map((value, index) => {
-                let bgClass = "bg-gray-300 text-black";
-                if (activeGreen.includes(index + 19)) bgClass = "bg-green-600 text-white";
-                else if (activeOrange.includes(index + 19)) bgClass = "bg-amber-400 text-white";
-                else if (activeGray.includes(index + 19)) bgClass = "bg-gray-600 text-white";
-                return (
-                    <div key={index} onClick={() => handleClick(value, index + 19)}
-                    className={`min-h-16 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
-                        index === 0 || index === 8
-                        ? "min-w-12 md:min-w-16 text-sm md:text-base"
-                        : "min-w-7 md:min-w-10 text-xl md:text-2xl"
-                    } ${bgClass}`}>
-                    {index === 8 ? <img src={back} alt="Back" className="w-7 h-7" /> : value}
-                    </div>
-                );
+                    let bgClass = "bg-gray-300 text-black";
+                    if (activeGreen.includes(index + 19)) bgClass = "bg-green-600 text-white";
+                    else if (activeOrange.includes(index + 19)) bgClass = "bg-amber-400 text-white";
+                    else if (activeGray.includes(index + 19)) bgClass = "bg-gray-600 text-white";
+                    return (
+                        <div key={index} onClick={() => handleClick(value, index + 19)}
+                        className={`min-h-16 md:min-h-20 cursor-pointer active:bg-gray-400 rounded-md flex items-center justify-center font-bold ${
+                            index === 0 || index === 8
+                            ? "min-w-12 md:min-w-16 text-sm md:text-base"
+                            : "min-w-7 md:min-w-10 text-xl md:text-2xl"
+                        } ${bgClass}`}>
+                        {index === 8 ? <img src={back} alt="Back" className="w-7 h-7" /> : value}
+                        </div>
+                    );
                 })}
             </div>
         </section>
