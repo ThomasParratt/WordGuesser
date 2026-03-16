@@ -173,8 +173,8 @@ export default function GuessInFive() {
                     const oi = newOrange.indexOf(keyIndex);
                     if (oi !== -1) newOrange.splice(oi, 1);
                 } else if (result[i] === 'orange') {
-                if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
-                    newOrange.push(keyIndex);
+                    if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
+                        newOrange.push(keyIndex);
                 } else {
                     if (!newGreen.includes(keyIndex) && !newOrange.includes(keyIndex))
                         newGray.push(keyIndex);
