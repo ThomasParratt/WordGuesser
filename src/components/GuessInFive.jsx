@@ -117,7 +117,7 @@ export default function GuessInFive() {
                     setFlippingRow(null);
                     setBouncingRow(attempts);
                     setTimeout(() => setBouncingRow(null), 1000);
-                }, 1200); // match your flip total duration
+                }, 1200); // match flip total duration
                 switch (attempts) {
                     case 1:
                         setMessage("Magnificent");
