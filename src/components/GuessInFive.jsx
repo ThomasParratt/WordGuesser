@@ -152,11 +152,11 @@ export default function GuessInFive() {
             });
             result.forEach((r, i) => {
                 setTimeout(() => {
-                setTileResults(prev => {
-                    const updated = [...prev];
-                    updated[start + i] = r;
-                    return updated;
-                });
+                    setTileResults(prev => {
+                        const updated = [...prev];
+                        updated[start + i] = r;
+                        return updated;
+                    });
                 }, i * 150 + 300); // half flip timing
             });
 
