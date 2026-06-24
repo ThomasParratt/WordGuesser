@@ -1,16 +1,70 @@
-# React + Vite
+# React Wordle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React Wordle is a small Wordle-inspired game built with React, Vite, and Tailwind CSS. It includes two play modes:
 
-Currently, two official plugins are available:
+- `Guess in 6`, a standard Wordle-style mode with six attempts.
+- `Against the clock`, a timed mode that tracks how long it takes to solve the word.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project uses local word lists in `src/assets/answers.json` and `src/assets/words.json`, and it supports both keyboard input and on-screen input. It is a frontend-only app, which makes it a focused demo of component state, event handling, and game logic.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Random daily-style word selection from a local answer list.
+- Green, orange, and gray tile feedback for each guess.
+- Keyboard coloring that reflects discovered letter states.
+- Animated tile flipping, shaking, and win bounce effects.
+- Mode selection screen for switching between normal and timed play.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19
+- Vite
+- Tailwind CSS
+- ESLint
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or newer
+- npm
+
+### Install
+
+```bash
+npm install
+```
+
+### Run locally
+
+```bash
+npm run dev
+```
+
+Then open the local Vite URL shown in the terminal.
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+### Lint the project
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+- `src/App.jsx` selects the game mode.
+- `src/components/GuessInFive.jsx` contains the six-attempt game logic.
+- `src/components/Clock.jsx` contains the timed game logic.
+- `src/assets/answers.json` stores valid answers.
+- `src/assets/words.json` stores the accepted guess list.
